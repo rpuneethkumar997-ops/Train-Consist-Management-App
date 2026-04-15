@@ -1,24 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
 
-        List<String> passengerBogies = new ArrayList<>();
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        System.out.println("Passenger bogies after addition: " + passengerBogies);
+        trainConsist.add(2, "Pantry Car");
 
-        passengerBogies.remove("AC Chair");
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
 
-        System.out.println("Passenger bogies after removal: " + passengerBogies);
-
-        boolean exists = passengerBogies.contains("Sleeper");
-
-        System.out.println("Does Sleeper exist? " + exists);
+        System.out.println("Final Train Consist: " + trainConsist);
     }
 }
