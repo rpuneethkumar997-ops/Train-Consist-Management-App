@@ -1,24 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
 
-        List<String> passengerBogies = new ArrayList<>();
+        LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+        trainFormation.add("Sleeper");
 
-        System.out.println("Passenger bogies after addition: " + passengerBogies);
-
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("Passenger bogies after removal: " + passengerBogies);
-
-        boolean exists = passengerBogies.contains("Sleeper");
-
-        System.out.println("Does Sleeper exist? " + exists);
+        System.out.println("Final Train Formation: " + trainFormation);
     }
 }
