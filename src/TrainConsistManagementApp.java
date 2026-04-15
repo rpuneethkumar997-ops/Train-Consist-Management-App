@@ -1,6 +1,7 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
@@ -34,14 +35,21 @@ public class TrainConsistManagementApp {
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 54));
         bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Sleeper", 68));   // duplicate type for grouping demo
+        bogies.add(new Bogie("Cylindrical Goods", 100));
+        bogies.add(new Bogie("Rectangular Goods", 120));
 
-        // Step 2: Sort bogies by capacity using Comparator
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        // Step 2: Group bogies by type using Collectors.groupingBy
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(Bogie::getName));
 
-        // Step 3: Display sorted bogies
-        System.out.println("\nSorted Bogies by Capacity:");
-        for (Bogie bogie : bogies) {
-            System.out.println(bogie);
+        // Step 3: Display grouped bogies
+        System.out.println("\nGrouped Bogies by Type:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("Type: " + entry.getKey());
+            for (Bogie bogie : entry.getValue()) {
+                System.out.println("  " + bogie);
+            }
         }
     }
 }
