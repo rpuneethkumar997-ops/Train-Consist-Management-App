@@ -1,26 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-class GoodsBogie {
-    private String type;
-    private String cargo;
+class Bogie {
+    private String name;
+    private int capacity;
 
-    public GoodsBogie(String type, String cargo) {
-        this.type = type;
-        this.cargo = cargo;
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public String getCargo() {
-        return cargo;
+    public int getCapacity() {
+        return capacity;
     }
 
     @Override
     public String toString() {
-        return type + " carrying " + cargo;
+        return name + " Capacity: " + capacity;
     }
 }
 
@@ -28,32 +29,20 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
 
-        // Step 1: Create a List of Goods Bogies
-        List<GoodsBogie> goodsBogies = new ArrayList<>();
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum")); // valid
-        goodsBogies.add(new GoodsBogie("Rectangular", "Coal"));      // valid
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal"));      // invalid
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 54));
+        bogies.add(new Bogie("First Class", 24));
 
-        // Step 2: Display goods bogies
-        System.out.println("\nGoods Bogies in Train:");
-        for (GoodsBogie bogie : goodsBogies) {
+
+        List<Bogie> highCapacityBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60) // condition
+                .collect(Collectors.toList());
+
+
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        for (Bogie bogie : highCapacityBogies) {
             System.out.println(bogie);
-        }
-
-        // Step 3: Safety Compliance Check using Streams
-        boolean isSafe = goodsBogies.stream()
-                .allMatch(b -> {
-                    if (b.getType().equalsIgnoreCase("Cylindrical")) {
-                        return b.getCargo().equalsIgnoreCase("Petroleum");
-                    }
-                    return true; // Non-cylindrical bogies can carry any cargo
-                });
-
-        // Step 4: Display result
-        if (isSafe) {
-            System.out.println("\nTrain is SAFETY COMPLIANT");
-        } else {
-            System.out.println("\nTrain is NOT SAFETY COMPLIANT");
         }
     }
 }
